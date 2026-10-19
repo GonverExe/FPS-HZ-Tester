@@ -9,7 +9,7 @@
 | Safari (macOS) | 16.5 % (with iOS) | ✅ | ⚠️ May stay at 60 Hz on 120 Hz screens | 75 % |
 | Safari and every browser on iPhone / iPad | — | ✅ | ⚠️ Often 60 Hz, 30 Hz in Low Power Mode | 65 % |
 
-*Worldwide share, [StatCounter, July 2026](https://gs.statcounter.com/browser-market-share). The percentages are estimates, not measurements: the site has only been tested in Chrome. The balls should look right everywhere; the risk is in the Hz reading, because a web page can only see how often the browser draws, not the monitor's real refresh rate.
+*Worldwide share, [StatCounter, July 2026](https://gs.statcounter.com/browser-market-share). The percentages are estimates, not measurements: the site has only been tested in Chrome and Opera. The balls should look right everywhere; the risk is in the Hz reading, because a web page can only see how often the browser draws, not the monitor's real refresh rate.
 
 <a name="top"></a>
 
