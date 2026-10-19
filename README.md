@@ -1,4 +1,4 @@
-| Browser | Usage share* | Balls and video | Monitor Hz reading | Works correctly (estimate) |
+| Browser | Phone | Video | Monitor Hz reading | Works correctly (estimate) |
 |---|---|---|---|---|
 | Opera (Gx, Neon, Air, ) | 1.9 % (Mini) | ✅ | ✅ | 99 % |
 | Chrome (Windows, MacOS, Linux) | 68 % (Mith Android) | ✅ | ✅ | 95 % |
