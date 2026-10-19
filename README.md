@@ -1,3 +1,16 @@
+| Browser | Usage share* | Balls and video | Monitor Hz reading | Works correctly (estimate) |
+|---|---|---|---|---|
+| Opera (Gx, Neon, Air, ) | 1.9 % (Mini) | ✅ | ✅ | 99 % |
+| Chrome (Windows, MacOS, Linux) | 68 % (Mith Android) | ✅ | ✅ | 95 % |
+| Chrome (Android) | — | ✅ | ⚠️ Battery saver can lower it | 90 % |
+| Edge | 5.4 % | ✅ | ✅ | 95 % |
+| Samsung Internet | 2.1 % | ✅ | ⚠️ Battery saver can lower it | 85 % |
+| Firefox | 3.3 % | ✅ | ⚠️ With two monitors it may follow the main one | 80 % |
+| Safari (macOS) | 16.5 % (with iOS) | ✅ | ⚠️ May stay at 60 Hz on 120 Hz screens | 75 % |
+| Safari and every browser on iPhone / iPad | — | ✅ | ⚠️ Often 60 Hz, 30 Hz in Low Power Mode | 65 % |
+
+*Worldwide share, [StatCounter, July 2026](https://gs.statcounter.com/browser-market-share). The percentages are estimates, not measurements: the site has only been tested in Chrome. The balls should look right everywhere; the risk is in the Hz reading, because a web page can only see how often the browser draws, not the monitor's real refresh rate.
+
 <a name="top"></a>
 
 <p align="center">
