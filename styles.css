@@ -155,20 +155,19 @@ h1 {
 
 .track {
   position: relative;
+  min-width: 0;
   height: var(--ball-size);
+  overflow: hidden;
   border-radius: 999px;
   background: var(--track);
 }
 
-.ball {
+/* Cada carril es un "reproductor": un canvas donde se dibujan los fotogramas */
+.track canvas {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: var(--ball-size);
-  height: var(--ball-size);
-  border-radius: 50%;
-  background: var(--ball);
-  will-change: transform;
+  inset: 0;
+  width: 100%;
+  height: 100%;
 }
 
 .empty {
@@ -276,19 +275,19 @@ button.danger {
   margin-left: auto;
 }
 
-.speed {
+.slider {
   display: flex;
   align-items: center;
   gap: 8px;
   flex-wrap: wrap;
 }
 
-.speed input {
+.slider input {
   width: 160px;
   accent-color: var(--ball);
 }
 
-#speedValue {
+.slider-value {
   min-width: 72px;
   font-variant-numeric: tabular-nums;
 }

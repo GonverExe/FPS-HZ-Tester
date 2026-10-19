@@ -10,7 +10,7 @@
   <header class="header">
     <div>
       <h1 data-i18n="title">Test de FPS / Hz</h1>
-      <p class="subtitle" data-i18n="subtitle">Cada bola se mueve a sus FPS. Si dos bolas se ven igual de suaves, tu monitor ya no puede mostrar más.</p>
+      <p class="subtitle" data-i18n="subtitle">Cada bola es un vídeo que se reproduce a sus FPS, con desenfoque de movimiento como una cámara real. Si dos bolas se ven igual de suaves, tu monitor ya no puede mostrar más.</p>
     </div>
     <div class="header-boxes">
       <div class="box" data-i18n-title="hzTitle" title="Frecuencia medida con requestAnimationFrame">
@@ -47,10 +47,15 @@
 
       <div class="controls">
         <button type="button" id="pauseBtn">Pausa</button>
-        <label class="speed" for="speed">
+        <label class="slider" for="speed">
           <span data-i18n="speed">Velocidad</span>
           <input type="range" id="speed" min="100" max="2000" step="50" value="600">
-          <span id="speedValue">600 px/s</span>
+          <span class="slider-value" id="speedValue">600 px/s</span>
+        </label>
+        <label class="slider" for="blur">
+          <span data-i18n="blur">Desenfoque</span>
+          <input type="range" id="blur" min="0" max="100" step="5" value="50">
+          <span class="slider-value" id="blurValue">50 %</span>
         </label>
         <button type="button" id="resetBtn" class="secondary" data-i18n="reset">Restaurar por defecto</button>
       </div>
