@@ -10,6 +10,7 @@
   --panel-border: rgba(255, 255, 255, 0.1);
   --track: rgba(255, 255, 255, 0.06);
   --item: rgba(0, 0, 0, 0.35);
+  --item-drag: #2b2b2b;
   --input-bg: #111111;
   --input-border: rgba(255, 255, 255, 0.25);
   --danger: #ef4b3f;
@@ -101,7 +102,9 @@ h1 {
 .lang-box select {
   appearance: none;
   -webkit-appearance: none;
-  padding: 2px 22px 2px 4px;
+  field-sizing: content;
+  padding-block: 2px;
+  padding-inline: 4px 22px;
   border: none;
   background: transparent url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%23111111' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat right 2px center;
   color: var(--on-ball);
@@ -109,6 +112,10 @@ h1 {
   font-size: 1.2rem;
   font-weight: 700;
   cursor: pointer;
+}
+
+[dir="rtl"] .lang-box select {
+  background-position: left 2px center;
 }
 
 .lang-box select:focus-visible {
@@ -139,7 +146,7 @@ h1 {
 .lane-label {
   display: flex;
   flex-direction: column;
-  text-align: right;
+  text-align: end;
 }
 
 .lane-fps {
@@ -160,6 +167,8 @@ h1 {
   overflow: hidden;
   border-radius: 999px;
   background: var(--track);
+  /* Lo que se pinta en un carril no obliga a recalcular el resto de la página */
+  contain: layout paint;
 }
 
 /* Cada carril es un "reproductor": un canvas donde se dibujan los fotogramas */
@@ -254,25 +263,94 @@ button.danger {
   list-style: none;
 }
 
+/* Cada fila se puede arrastrar para cambiar el orden */
 .ball-item {
+  position: relative;
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   gap: 10px;
   padding: 8px 12px;
   border-radius: 12px;
   background: var(--item);
+  cursor: grab;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
 }
 
-.mini-ball {
+.ball-item.dragging {
+  z-index: 1;
+  background: var(--item-drag);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.55), 0 0 0 1px var(--panel-border);
+  cursor: grabbing;
+}
+
+.ball-list.is-dragging,
+.ball-list.is-dragging * {
+  cursor: grabbing;
+}
+
+/* Círculo de color: es un <input type="color"> con forma de bola */
+.color-dot {
   flex: none;
-  width: 16px;
-  height: 16px;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  border: none;
   border-radius: 50%;
-  background: var(--ball);
+  background: none;
+  box-shadow: 0 0 0 1px var(--input-border);
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
 }
 
-.ball-item button {
-  margin-left: auto;
+.color-dot:hover {
+  box-shadow: 0 0 0 2px var(--ball);
+}
+
+.color-dot::-webkit-color-swatch-wrapper {
+  padding: 0;
+}
+
+.color-dot::-webkit-color-swatch {
+  border: none;
+  border-radius: 50%;
+}
+
+.color-dot::-moz-color-swatch {
+  border: none;
+  border-radius: 50%;
+}
+
+.item-actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-inline-start: auto;
+}
+
+.icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  padding: 0;
+  border-color: var(--input-border);
+  background: transparent;
+  color: var(--ball);
+}
+
+.icon-btn svg {
+  width: 14px;
+  height: 14px;
+}
+
+.icon-btn:disabled {
+  opacity: 0.3;
+  cursor: default;
 }
 
 .slider {
@@ -290,21 +368,6 @@ button.danger {
 .slider-value {
   min-width: 72px;
   font-variant-numeric: tabular-nums;
-}
-
-.hint {
-  margin: 14px 0 0;
-  font-size: 0.85rem;
-  color: var(--muted);
-}
-
-kbd {
-  padding: 1px 6px;
-  border: 1px solid var(--input-border);
-  border-radius: 4px;
-  background: var(--input-bg);
-  color: var(--text);
-  font-size: 0.8rem;
 }
 
 /* ---------- Móvil ---------- */
@@ -340,5 +403,23 @@ kbd {
 
   .panel {
     padding: 16px;
+  }
+
+  .ball-item {
+    gap: 6px;
+    padding: 8px 10px;
+  }
+
+  .ball-item input[type="number"] {
+    width: 72px;
+  }
+
+  .icon-btn {
+    width: 32px;
+    height: 32px;
+  }
+
+  .item-actions .danger {
+    padding-inline: 8px;
   }
 }

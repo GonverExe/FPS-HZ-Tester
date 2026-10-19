@@ -1,69 +1,70 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en" dir="ltr">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Test de FPS / Hz</title>
-  <link rel="stylesheet" href="styles.css">
+  <title>FPS / Hz Test</title>
+  <meta name="description" content="Compare how smooth 15, 30, 60, 144… up to 2500 FPS look on your screen and measure your monitor's refresh rate.">
+  <meta name="color-scheme" content="dark">
+  <meta name="theme-color" content="#060606">
+  <link rel="icon" href="web/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="web/css/styles.css">
+  <script src="web/js/i18n.js" defer></script>
+  <script src="web/js/hz-meter.js" defer></script>
+  <script src="web/js/app.js" defer></script>
 </head>
 <body>
   <header class="header">
     <div>
-      <h1 data-i18n="title">Test de FPS / Hz</h1>
-      <p class="subtitle" data-i18n="subtitle">Cada bola es un vídeo que se reproduce a sus FPS, con desenfoque de movimiento como una cámara real. Si dos bolas se ven igual de suaves, tu monitor ya no puede mostrar más.</p>
+      <h1 data-i18n="title">FPS / Hz Test</h1>
+      <p class="subtitle" data-i18n="subtitle">Every ball is the same 2500 FPS video. Each lane plays it showing only its own FPS, so they stay in sync. If two balls look equally smooth, your monitor can’t show any more.</p>
     </div>
     <div class="header-boxes">
-      <div class="box" data-i18n-title="hzTitle" title="Frecuencia medida con requestAnimationFrame">
-        <span class="box-label" data-i18n="monitor">Tu monitor</span>
-        <span class="hz-value" id="hzValue">Midiendo…</span>
+      <div class="box" data-i18n-title="hzTitle" title="Refresh rate measured with requestAnimationFrame">
+        <span class="box-label" data-i18n="monitor">Your monitor</span>
+        <span class="hz-value" id="hzValue">Measuring…</span>
       </div>
       <label class="box lang-box">
-        <span class="box-label" data-i18n="language">Idioma</span>
+        <span class="box-label" data-i18n="language">Language</span>
         <select id="langSelect">
-          <option value="es">Español</option>
           <option value="en">English</option>
-          <option value="ru">Русский</option>
-          <option value="fr">Français</option>
-          <option value="pt">Português</option>
-          <option value="it">Italiano</option>
           <option value="zh">中文</option>
+          <option value="es">Español</option>
+          <option value="ar">العربية</option>
+          <option value="pt">Português</option>
+          <option value="id">Indonesia / Melayu</option>
+          <option value="fr">Français</option>
+          <option value="ja">日本語</option>
+          <option value="ru">Русский</option>
+          <option value="de">Deutsch</option>
         </select>
       </label>
     </div>
   </header>
 
   <main>
-    <section class="stage" id="stage" data-i18n-aria="stageLabel" aria-label="Bolas en movimiento"></section>
+    <section class="stage" id="stage" data-i18n-aria="stageLabel" aria-label="Moving balls"></section>
 
-    <section class="panel" data-i18n-aria="panelLabel" aria-label="Controles">
+    <section class="panel" data-i18n-aria="panelLabel" aria-label="Controls">
       <form class="add-form" id="addForm">
-        <label for="newFps" data-i18n="addBall">Añadir bola</label>
-        <input type="number" id="newFps" min="1" max="2500" step="any" data-i18n-placeholder="placeholder" placeholder="Ej. 240" required>
+        <label for="newFps" data-i18n="addBall">Add ball</label>
+        <input type="number" id="newFps" min="1" max="2500" step="any" data-i18n-placeholder="placeholder" placeholder="e.g. 240" required>
         <span class="unit">FPS</span>
-        <button type="submit" data-i18n="add">Añadir</button>
+        <button type="submit" data-i18n="add">Add</button>
       </form>
 
       <ul class="ball-list" id="ballList"></ul>
 
       <div class="controls">
-        <button type="button" id="pauseBtn">Pausa</button>
+        <button type="button" id="pauseBtn">Pause</button>
         <label class="slider" for="speed">
-          <span data-i18n="speed">Velocidad</span>
-          <input type="range" id="speed" min="100" max="2000" step="50" value="600">
-          <span class="slider-value" id="speedValue">600 px/s</span>
+          <span data-i18n="speed">Speed</span>
+          <input type="range" id="speed" min="100" max="2000" step="50" value="1000" autocomplete="off">
+          <span class="slider-value" id="speedValue">1000 px/s</span>
         </label>
-        <label class="slider" for="blur">
-          <span data-i18n="blur">Desenfoque</span>
-          <input type="range" id="blur" min="0" max="100" step="5" value="50">
-          <span class="slider-value" id="blurValue">50 %</span>
-        </label>
-        <button type="button" id="resetBtn" class="secondary" data-i18n="reset">Restaurar por defecto</button>
+        <button type="button" id="resetBtn" class="secondary" data-i18n="reset">Restore defaults</button>
       </div>
-
-      <p class="hint"><span data-i18n="hintBefore">Pulsa </span><kbd data-i18n="spaceKey">Espacio</kbd><span data-i18n="hintAfter"> para pausar o reanudar. Los cambios se guardan en este navegador.</span></p>
     </section>
   </main>
-
-  <script src="script.js"></script>
 </body>
 </html>
