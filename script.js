@@ -6,6 +6,7 @@
   const LANG_KEY = 'fpsTester.lang';
   const MIN_FPS = 1;
   const MAX_FPS = 2500;
+  const MAX_BLUR_SAMPLES = 256;
   const COMMON_HZ = [
     24, 30, 48, 50, 60, 72, 75, 85, 90, 100, 120, 144, 160, 165, 170, 175,
     180, 200, 240, 280, 300, 360, 390, 480, 500, 540, 600, 750, 1000
@@ -20,7 +21,7 @@
   const I18N = {
     es: {
       title: 'Test de FPS / Hz',
-      subtitle: 'Cada bola se mueve a sus FPS. Si dos bolas se ven igual de suaves, tu monitor ya no puede mostrar más.',
+      subtitle: 'Cada bola es un vídeo que se reproduce a sus FPS, con desenfoque de movimiento como una cámara real. Si dos bolas se ven igual de suaves, tu monitor ya no puede mostrar más.',
       monitor: 'Tu monitor',
       measuring: 'Midiendo…',
       hzTitle: 'Frecuencia medida con requestAnimationFrame',
@@ -34,6 +35,7 @@
       pause: 'Pausa',
       resume: 'Reanudar',
       speed: 'Velocidad',
+      blur: 'Desenfoque',
       reset: 'Restaurar por defecto',
       hintBefore: 'Pulsa ',
       spaceKey: 'Espacio',
@@ -45,7 +47,7 @@
     },
     en: {
       title: 'FPS / Hz Test',
-      subtitle: 'Each ball moves at its own FPS. If two balls look equally smooth, your monitor can’t show any more.',
+      subtitle: 'Each ball is a video playing at its own FPS, with motion blur like a real camera. If two balls look equally smooth, your monitor can’t show any more.',
       monitor: 'Your monitor',
       measuring: 'Measuring…',
       hzTitle: 'Refresh rate measured with requestAnimationFrame',
@@ -59,6 +61,7 @@
       pause: 'Pause',
       resume: 'Resume',
       speed: 'Speed',
+      blur: 'Motion blur',
       reset: 'Restore defaults',
       hintBefore: 'Press ',
       spaceKey: 'Space',
@@ -70,7 +73,7 @@
     },
     ru: {
       title: 'Тест FPS / Гц',
-      subtitle: 'Каждый шар движется со своей частотой кадров. Если два шара выглядят одинаково плавно, ваш монитор больше не может показать.',
+      subtitle: 'Каждый шар — это видео, которое воспроизводится со своей частотой кадров и с размытием движения, как у настоящей камеры. Если два шара выглядят одинаково плавно, ваш монитор больше не может показать.',
       monitor: 'Ваш монитор',
       measuring: 'Измерение…',
       hzTitle: 'Частота измерена с помощью requestAnimationFrame',
@@ -84,6 +87,7 @@
       pause: 'Пауза',
       resume: 'Продолжить',
       speed: 'Скорость',
+      blur: 'Размытие',
       reset: 'Восстановить по умолчанию',
       hintBefore: 'Нажмите ',
       spaceKey: 'Пробел',
@@ -95,7 +99,7 @@
     },
     fr: {
       title: 'Test FPS / Hz',
-      subtitle: 'Chaque balle se déplace à ses propres FPS. Si deux balles semblent aussi fluides l’une que l’autre, votre écran ne peut pas afficher plus.',
+      subtitle: 'Chaque balle est une vidéo lue à ses propres FPS, avec un flou de mouvement comme une vraie caméra. Si deux balles semblent aussi fluides l’une que l’autre, votre écran ne peut pas afficher plus.',
       monitor: 'Votre écran',
       measuring: 'Mesure…',
       hzTitle: 'Fréquence mesurée avec requestAnimationFrame',
@@ -109,6 +113,7 @@
       pause: 'Pause',
       resume: 'Reprendre',
       speed: 'Vitesse',
+      blur: 'Flou',
       reset: 'Rétablir par défaut',
       hintBefore: 'Appuyez sur ',
       spaceKey: 'Espace',
@@ -120,7 +125,7 @@
     },
     pt: {
       title: 'Teste de FPS / Hz',
-      subtitle: 'Cada bola se move no seu próprio FPS. Se duas bolas parecem igualmente suaves, seu monitor não consegue mostrar mais.',
+      subtitle: 'Cada bola é um vídeo reproduzido no seu próprio FPS, com desfoque de movimento como uma câmera de verdade. Se duas bolas parecem igualmente suaves, seu monitor não consegue mostrar mais.',
       monitor: 'Seu monitor',
       measuring: 'Medindo…',
       hzTitle: 'Frequência medida com requestAnimationFrame',
@@ -134,6 +139,7 @@
       pause: 'Pausar',
       resume: 'Retomar',
       speed: 'Velocidade',
+      blur: 'Desfoque',
       reset: 'Restaurar padrão',
       hintBefore: 'Pressione ',
       spaceKey: 'Espaço',
@@ -145,7 +151,7 @@
     },
     it: {
       title: 'Test FPS / Hz',
-      subtitle: 'Ogni pallina si muove ai suoi FPS. Se due palline sembrano ugualmente fluide, il tuo monitor non può mostrare di più.',
+      subtitle: 'Ogni pallina è un video riprodotto ai suoi FPS, con sfocatura di movimento come una vera videocamera. Se due palline sembrano ugualmente fluide, il tuo monitor non può mostrare di più.',
       monitor: 'Il tuo monitor',
       measuring: 'Misurazione…',
       hzTitle: 'Frequenza misurata con requestAnimationFrame',
@@ -159,6 +165,7 @@
       pause: 'Pausa',
       resume: 'Riprendi',
       speed: 'Velocità',
+      blur: 'Sfocatura',
       reset: 'Ripristina predefiniti',
       hintBefore: 'Premi ',
       spaceKey: 'Spazio',
@@ -170,7 +177,7 @@
     },
     zh: {
       title: 'FPS / Hz 测试',
-      subtitle: '每个小球按各自的 FPS 移动。如果两个小球看起来一样流畅，说明你的显示器已无法显示更高的帧率。',
+      subtitle: '每个小球都是一段按各自 FPS 播放的视频，带有和真实摄像机一样的运动模糊。如果两个小球看起来一样流畅，说明你的显示器已无法显示更高的帧率。',
       monitor: '你的显示器',
       measuring: '测量中…',
       hzTitle: '使用 requestAnimationFrame 测得的刷新率',
@@ -184,6 +191,7 @@
       pause: '暂停',
       resume: '继续',
       speed: '速度',
+      blur: '运动模糊',
       reset: '恢复默认',
       hintBefore: '按 ',
       spaceKey: '空格键',
@@ -203,10 +211,14 @@
   const resetBtn = document.getElementById('resetBtn');
   const speedInput = document.getElementById('speed');
   const speedValue = document.getElementById('speedValue');
+  const blurInput = document.getElementById('blur');
+  const blurValue = document.getElementById('blurValue');
   const hzValue = document.getElementById('hzValue');
   const langSelect = document.getElementById('langSelect');
 
-  // Cada bola: { fps, ballEl, trackEl, warnEl, lastX }
+  const ballColor = getComputedStyle(document.documentElement).getPropertyValue('--ball').trim() || '#f2f2f2';
+
+  // Cada bola: { fps, trackEl, canvas, ctx, warnEl, lastFrame }
   let balls = [];
   let lang = 'es';
 
@@ -214,8 +226,11 @@
   let clock = 0;          // segundos de animación (no avanza en pausa)
   let offset = 0;         // px, evita saltos al cambiar la velocidad
   let speed = Number(speedInput.value);
+  let blur = Number(blurInput.value) / 100;  // parte del fotograma con el "obturador" abierto
   let paused = false;
   let lastNow = null;
+  let laneW = 0;          // tamaño de cada carril en px CSS
+  let laneH = 0;
   let travel = 0;         // recorrido disponible en px
 
   // Medición de Hz del monitor
@@ -237,6 +252,10 @@
 
   function formatFps(fps) {
     return fps.toLocaleString(LOCALES[lang], { maximumFractionDigits: 2 });
+  }
+
+  function formatBlur() {
+    return blur.toLocaleString(LOCALES[lang], { style: 'percent' });
   }
 
   function mod(value, m) {
@@ -315,6 +334,7 @@
     langSelect.value = lang;
     pauseBtn.textContent = paused ? t('resume') : t('pause');
     hzValue.textContent = detectedHz ? detectedHz + ' ' + t('hzUnit') : t('measuring');
+    blurValue.textContent = formatBlur();
     render();
   }
 
@@ -358,16 +378,16 @@
     const track = document.createElement('div');
     track.className = 'track';
 
-    const dot = document.createElement('div');
-    dot.className = 'ball';
-    track.appendChild(dot);
+    const canvas = document.createElement('canvas');
+    track.appendChild(canvas);
 
     lane.append(label, track);
 
-    ball.ballEl = dot;
     ball.trackEl = track;
+    ball.canvas = canvas;
+    ball.ctx = canvas.getContext('2d');
     ball.warnEl = warn;
-    ball.lastX = null;
+    ball.lastFrame = null;
     return lane;
   }
 
@@ -428,19 +448,60 @@
 
   function measure() {
     const first = balls[0];
-    travel = first ? first.trackEl.clientWidth - first.ballEl.offsetWidth : 0;
-    for (const ball of balls) ball.lastX = null;
+    if (!first) {
+      travel = 0;
+      return;
+    }
+    laneW = first.trackEl.clientWidth;
+    laneH = first.trackEl.clientHeight;
+    travel = laneW - laneH;
+    const dpr = window.devicePixelRatio || 1;
+    for (const ball of balls) {
+      ball.canvas.width = Math.round(laneW * dpr);
+      ball.canvas.height = Math.round(laneH * dpr);
+      ball.ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      ball.lastFrame = null;
+    }
+  }
+
+  function invalidateFrames() {
+    for (const ball of balls) ball.lastFrame = null;
+  }
+
+  // Dibuja un fotograma del "vídeo" de una bola. Como en una cámara, el fotograma
+  // recoge todo el movimiento mientras el obturador está abierto: se dibujan muchas
+  // copias de la bola a lo largo de ese tramo y se promedian (desenfoque de movimiento).
+  function drawFrame(ball, frameIndex) {
+    const ctx = ball.ctx;
+    const r = laneH / 2;
+    const frameStart = frameIndex / ball.fps;
+    const exposure = blur / ball.fps;
+    const blurPx = exposure * speed;
+    const samples = blurPx < 0.5 ? 1 : Math.min(MAX_BLUR_SAMPLES, Math.ceil(blurPx) + 1);
+
+    ctx.clearRect(0, 0, laneW, laneH);
+    ctx.globalCompositeOperation = 'lighter';
+    ctx.globalAlpha = 1 / samples;
+    ctx.fillStyle = ballColor;
+    for (let i = 0; i < samples; i++) {
+      const time = samples === 1 ? frameStart : frameStart + exposure * (i / (samples - 1));
+      const x = mod(time * speed + offset, travel) + r;
+      ctx.beginPath();
+      ctx.arc(x, r, r, 0, Math.PI * 2);
+      ctx.fill();
+    }
+    ctx.globalAlpha = 1;
+    ctx.globalCompositeOperation = 'source-over';
   }
 
   function draw() {
     if (travel <= 0) return;
     for (const ball of balls) {
-      // El tiempo se "congela" entre fotogramas de la bola: solo avanza a sus FPS
-      const time = Math.floor(clock * ball.fps) / ball.fps;
-      const x = mod(time * speed + offset, travel);
-      if (x !== ball.lastX) {
-        ball.ballEl.style.transform = 'translate3d(' + x + 'px, 0, 0)';
-        ball.lastX = x;
+      // Como un vídeo: el fotograma solo cambia a los FPS de la bola
+      const frameIndex = Math.floor(clock * ball.fps);
+      if (frameIndex !== ball.lastFrame) {
+        drawFrame(ball, frameIndex);
+        ball.lastFrame = frameIndex;
       }
     }
   }
@@ -528,7 +589,14 @@
     offset += clock * (speed - newSpeed);
     speed = newSpeed;
     speedValue.textContent = speed + ' px/s';
-    for (const ball of balls) ball.lastX = null;
+    invalidateFrames();
+    draw();
+  });
+
+  blurInput.addEventListener('input', () => {
+    blur = Number(blurInput.value) / 100;
+    blurValue.textContent = formatBlur();
+    invalidateFrames();
     draw();
   });
 

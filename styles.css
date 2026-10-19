@@ -314,6 +314,18 @@ kbd {
     --label-w: 64px;
   }
 
+  .box {
+    padding: 8px 14px;
+  }
+
+  .hz-value {
+    font-size: 1.2rem;
+  }
+
+  .lang-box select {
+    font-size: 1.05rem;
+  }
+
   .lane {
     gap: 8px;
   }
