@@ -1,0 +1,333 @@
+:root {
+  color-scheme: dark;
+  --bg-top: #060606;
+  --bg-bottom: #565656;
+  --ball: #f2f2f2;
+  --on-ball: #111111;
+  --text: #f2f2f2;
+  --muted: #b5b5b5;
+  --panel: rgba(0, 0, 0, 0.45);
+  --panel-border: rgba(255, 255, 255, 0.1);
+  --track: rgba(255, 255, 255, 0.06);
+  --item: rgba(0, 0, 0, 0.35);
+  --input-bg: #111111;
+  --input-border: rgba(255, 255, 255, 0.25);
+  --danger: #ef4b3f;
+  --warn: #f0b35a;
+  --ball-size: clamp(28px, 5vw, 56px);
+  --label-w: 112px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+}
+
+body {
+  min-height: 100vh;
+  padding: 24px 16px 40px;
+  background-color: var(--bg-bottom);
+  background-image: linear-gradient(to bottom, var(--bg-top), var(--bg-bottom));
+  background-attachment: fixed;
+  color: var(--text);
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  line-height: 1.4;
+}
+
+/* ---------- Cabecera ---------- */
+
+.header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+h1 {
+  margin: 0;
+  font-size: clamp(1.5rem, 4vw, 2.2rem);
+}
+
+.subtitle {
+  margin: 4px 0 0;
+  max-width: 60ch;
+  color: var(--muted);
+}
+
+.header-boxes {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+  gap: 10px;
+}
+
+.box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 20px;
+  border-radius: 16px;
+  background: var(--ball);
+  color: var(--on-ball);
+}
+
+.box-label {
+  font-size: 0.8rem;
+  opacity: 0.75;
+}
+
+.hz-value {
+  font-size: 1.6rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Desplegable de idioma con el mismo aspecto que la caja de Hz */
+.lang-box {
+  cursor: pointer;
+}
+
+.lang-box:focus-within {
+  outline: 2px solid var(--ball);
+  outline-offset: 3px;
+}
+
+.lang-box select {
+  appearance: none;
+  -webkit-appearance: none;
+  padding: 2px 22px 2px 4px;
+  border: none;
+  background: transparent url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%23111111' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat right 2px center;
+  color: var(--on-ball);
+  font: inherit;
+  font-size: 1.2rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.lang-box select:focus-visible {
+  outline: none;
+}
+
+.lang-box option {
+  background: var(--ball);
+  color: var(--on-ball);
+}
+
+/* ---------- Zona de bolas ---------- */
+
+.stage {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin: 28px 0;
+}
+
+.lane {
+  display: grid;
+  grid-template-columns: var(--label-w) 1fr;
+  align-items: center;
+  gap: 12px;
+}
+
+.lane-label {
+  display: flex;
+  flex-direction: column;
+  text-align: right;
+}
+
+.lane-fps {
+  font-size: 1.15rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.lane-warn {
+  font-size: 0.75rem;
+  color: var(--warn);
+}
+
+.track {
+  position: relative;
+  height: var(--ball-size);
+  border-radius: 999px;
+  background: var(--track);
+}
+
+.ball {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: var(--ball-size);
+  height: var(--ball-size);
+  border-radius: 50%;
+  background: var(--ball);
+  will-change: transform;
+}
+
+.empty {
+  margin: 0;
+  padding: 24px;
+  text-align: center;
+  color: var(--muted);
+}
+
+/* ---------- Panel de control ---------- */
+
+.panel {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid var(--panel-border);
+  border-radius: 16px;
+  background: var(--panel);
+  backdrop-filter: blur(6px);
+}
+
+.add-form,
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
+
+.add-form label {
+  font-weight: 600;
+}
+
+input[type="number"] {
+  width: 110px;
+  padding: 9px 12px;
+  border: 1px solid var(--input-border);
+  border-radius: 10px;
+  background: var(--input-bg);
+  color: var(--text);
+  font: inherit;
+}
+
+.unit {
+  color: var(--muted);
+}
+
+button {
+  padding: 9px 16px;
+  border: 1px solid var(--ball);
+  border-radius: 10px;
+  background: var(--ball);
+  color: var(--on-ball);
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+button:hover {
+  opacity: 0.88;
+}
+
+button.secondary {
+  background: transparent;
+  color: var(--ball);
+}
+
+button.danger {
+  border-color: var(--danger);
+  background: transparent;
+  color: var(--danger);
+}
+
+:focus-visible {
+  outline: 2px solid var(--ball);
+  outline-offset: 2px;
+}
+
+.ball-list {
+  display: grid;
+  gap: 8px;
+  margin: 16px 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ball-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px;
+  border-radius: 12px;
+  background: var(--item);
+}
+
+.mini-ball {
+  flex: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--ball);
+}
+
+.ball-item button {
+  margin-left: auto;
+}
+
+.speed {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.speed input {
+  width: 160px;
+  accent-color: var(--ball);
+}
+
+#speedValue {
+  min-width: 72px;
+  font-variant-numeric: tabular-nums;
+}
+
+.hint {
+  margin: 14px 0 0;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+kbd {
+  padding: 1px 6px;
+  border: 1px solid var(--input-border);
+  border-radius: 4px;
+  background: var(--input-bg);
+  color: var(--text);
+  font-size: 0.8rem;
+}
+
+/* ---------- Móvil ---------- */
+
+@media (max-width: 560px) {
+  :root {
+    --label-w: 64px;
+  }
+
+  .lane {
+    gap: 8px;
+  }
+
+  .lane-fps {
+    font-size: 0.95rem;
+  }
+
+  .lane-warn {
+    font-size: 0.65rem;
+  }
+
+  .panel {
+    padding: 16px;
+  }
+}
