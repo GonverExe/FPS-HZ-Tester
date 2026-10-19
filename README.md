@@ -1,3 +1,4 @@
+
 | Browser | Phone | Video | Monitor Hz reading | Works correctly (estimate) |
 |---|---|---|---|---|
 | Opera (Gx, Neon, Air, ) | 1.9 % (Mini) | ✅ | ✅ | 99 % |
